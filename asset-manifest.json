@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/%7Balgocalc%7D/static/css/main.e6c13ad2.css",
-    "main.js": "/%7Balgocalc%7D/static/js/main.8940b0ef.js",
-    "index.html": "/%7Balgocalc%7D/index.html",
-    "main.e6c13ad2.css.map": "/%7Balgocalc%7D/static/css/main.e6c13ad2.css.map",
-    "main.8940b0ef.js.map": "/%7Balgocalc%7D/static/js/main.8940b0ef.js.map"
+    "main.css": "/algocalc/static/css/main.e6c13ad2.css",
+    "main.js": "/algocalc/static/js/main.8940b0ef.js",
+    "index.html": "/algocalc/index.html",
+    "main.e6c13ad2.css.map": "/algocalc/static/css/main.e6c13ad2.css.map",
+    "main.8940b0ef.js.map": "/algocalc/static/js/main.8940b0ef.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
