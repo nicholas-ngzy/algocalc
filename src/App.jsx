@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Button, Container, Stack, Typography } from '@mui/material';
-import Options from './Options';
 import Form from './Form';
 import Results from './Results';
 
@@ -21,7 +20,9 @@ function App() {
                 var amount = info.initialAmount * (1 + info.interestRate / 100);
                 for (let i = 1; i < info.duration; i++) {
                     amount =
-                        (parseFloat(amount) + parseFloat(info.additionalContribution)) * (1 + info.interestRate / 100);
+                        (parseFloat(amount) +
+                            parseFloat(info.additionalContribution)) *
+                        (1 + info.interestRate / 100);
                 }
                 setInfo({ ...info, finalAmount: amount });
                 break;
@@ -51,10 +52,18 @@ function App() {
     return (
         <Container maxWidth='sm'>
             <Stack spacing={2}>
-                <Typography variant='h3' marginTop={3} style={{ textAlign: 'center' }}>
+                <Typography
+                    variant='h3'
+                    marginTop={3}
+                    style={{ textAlign: 'center' }}
+                >
                     AlgoCalc
                 </Typography>
-                <Typography variant='h5' marginBottom={2} style={{ textAlign: 'center' }}>
+                <Typography
+                    variant='h5'
+                    marginBottom={2}
+                    style={{ textAlign: 'center' }}
+                >
                     Calculate your investment
                 </Typography>
                 <Options goal={goal} updateGoal={updateGoal} />
