@@ -66,7 +66,6 @@ function App() {
                 >
                     Calculate your investment
                 </Typography>
-                <Options goal={goal} updateGoal={updateGoal} />
                 <Form goal={goal} info={info} updateForm={updateForm} />
                 <Button variant='contained' onClick={handleSubmit}>
                     Submit
