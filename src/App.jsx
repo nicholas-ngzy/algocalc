@@ -1,30 +1,31 @@
 import { useState } from 'react';
-import { Button, Container, Stack, Typography } from '@mui/material';
-import Form from './Form';
+import InputForm from './InputForm';
 import Results from './Results';
+import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 function App() {
     const [goal, setGoal] = useState('final-amount');
-    const [info, setInfo] = useState({
-        initialAmount: '0',
-        duration: '0',
-        interestRate: '0',
-        additionalContribution: '0',
-        finalAmount: '0',
-    });
+    const [info, setInfo] = useState();
     const [showResults, setShowResults] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = (props) => {
         switch (goal) {
             case 'final-amount':
-                var amount = info.initialAmount * (1 + info.interestRate / 100);
-                for (let i = 1; i < info.duration; i++) {
+                var amount =
+                    props.initialAmount * (1 + props.interestRate / 100);
+                for (let i = 1; i < props.duration; i++) {
                     amount =
-                        (parseFloat(amount) +
-                            parseFloat(info.additionalContribution)) *
-                        (1 + info.interestRate / 100);
+                        (amount + props.additionalContribution) *
+                        (1 + props.interestRate / 100);
                 }
-                setInfo({ ...info, finalAmount: amount });
+                setInfo({
+                    initialAmount: props.initialAmount,
+                    duration: props.duration,
+                    interestRate: props.interestRate,
+                    additionalContribution: props.additionalContribution,
+                    finalAmount: amount,
+                });
                 break;
             default:
                 setInfo({
@@ -39,40 +40,40 @@ function App() {
         setShowResults(true);
     };
 
-    const updateGoal = (newGoal) => {
-        setGoal(newGoal);
-        setShowResults(false);
-    };
-
-    const updateForm = (name, value) => {
-        setInfo({ ...info, [name]: value });
-        setShowResults(false);
-    };
-
     return (
-        <Container maxWidth='sm'>
-            <Stack spacing={2}>
-                <Typography
-                    variant='h3'
-                    marginTop={3}
-                    style={{ textAlign: 'center' }}
-                >
-                    AlgoCalc
-                </Typography>
-                <Typography
-                    variant='h5'
-                    marginBottom={2}
-                    style={{ textAlign: 'center' }}
-                >
-                    Calculate your investment
-                </Typography>
-                <Form goal={goal} info={info} updateForm={updateForm} />
-                <Button variant='contained' onClick={handleSubmit}>
-                    Submit
-                </Button>
-                {showResults ? <Results info={info} /> : null}
-            </Stack>
-        </Container>
+        <div className='m-6'>
+            <h1 className='text-3xl font-extrabold my-3'>Algocalc</h1>
+            <Tabs
+                defaultValue='final-amount'
+                onValueChange={(value) => setGoal(value)}
+            >
+                <TabsList className='grid w-full grid-cols-2'>
+                    <TabsTrigger value='final-amount'>Final Amount</TabsTrigger>
+                    <TabsTrigger disabled value='duration'>
+                        Duration
+                    </TabsTrigger>
+                </TabsList>
+                <TabsContent value='final-amount'>
+                    <InputForm
+                        goal={goal}
+                        info={info}
+                        handleSubmit={handleSubmit}
+                    />
+                </TabsContent>
+                <TabsContent value='duration'>
+                    <InputForm
+                        goal={goal}
+                        info={info}
+                        handleSubmit={handleSubmit}
+                    />
+                </TabsContent>
+            </Tabs>
+            <Separator className='my-4' />
+            {showResults ? <Results info={info} /> : null}
+            <p className='py-3'>
+                &copy; 2026 Nicholas Ng. All rights reserved.
+            </p>
+        </div>
     );
 }
 
