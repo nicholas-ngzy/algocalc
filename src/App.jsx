@@ -12,9 +12,12 @@ function App() {
     const handleSubmit = (props) => {
         switch (goal) {
             case 'final-amount':
-                var amount = props.initialAmount * (1 + props.interestRate / 100);
+                var amount =
+                    props.initialAmount * (1 + props.interestRate / 100);
                 for (let i = 1; i < props.duration; i++) {
-                    amount = (amount + props.additionalContribution) * (1 + props.interestRate / 100);
+                    amount =
+                        (amount + props.additionalContribution) *
+                        (1 + props.interestRate / 100);
                 }
                 setInfo({
                     initialAmount: props.initialAmount,
@@ -40,7 +43,10 @@ function App() {
     return (
         <div className='m-6'>
             <h1 className='text-3xl font-extrabold my-3'>Algocalc</h1>
-            <Tabs defaultValue='final-amount' onValueChange={(value) => setGoal(value)}>
+            <Tabs
+                defaultValue='final-amount'
+                onValueChange={(value) => setGoal(value)}
+            >
                 <TabsList className='grid w-full grid-cols-2'>
                     <TabsTrigger value='final-amount'>Final Amount</TabsTrigger>
                     <TabsTrigger disabled value='duration'>
@@ -48,15 +54,25 @@ function App() {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value='final-amount'>
-                    <InputForm goal={goal} info={info} handleSubmit={handleSubmit} />
+                    <InputForm
+                        goal={goal}
+                        info={info}
+                        handleSubmit={handleSubmit}
+                    />
                 </TabsContent>
                 <TabsContent value='duration'>
-                    <InputForm goal={goal} info={info} handleSubmit={handleSubmit} />
+                    <InputForm
+                        goal={goal}
+                        info={info}
+                        handleSubmit={handleSubmit}
+                    />
                 </TabsContent>
             </Tabs>
             <Separator className='my-4' />
             {showResults ? <Results info={info} /> : null}
-            <p className='py-3'>&copy; 2024 Nicholas Ng. All rights reserved.</p>
+            <p className='py-3'>
+                &copy; 2026 Nicholas Ng. All rights reserved.
+            </p>
         </div>
     );
 }
