@@ -3,6 +3,7 @@ import InputForm from './InputForm';
 import Results from './Results';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { calculateFinalAmount } from 'utils';
 
 function App() {
 	const [goal, setGoal] = useState('final-amount');
@@ -12,19 +13,18 @@ function App() {
 	const handleSubmit = (props) => {
 		switch (goal) {
 			case 'final-amount':
-				var amount =
-					props.initialAmount * (1 + props.interestRate / 100);
-				for (let i = 1; i < props.duration; i++) {
-					amount =
-						(amount + props.additionalContribution) *
-						(1 + props.interestRate / 100);
-				}
+				var finalAmount = calculateFinalAmount(
+					props.initialAmount,
+					props.duration,
+					props.interestRate,
+					props.additionalContribution,
+				);
 				setInfo({
 					initialAmount: props.initialAmount,
 					duration: props.duration,
 					interestRate: props.interestRate,
 					additionalContribution: props.additionalContribution,
-					finalAmount: amount,
+					finalAmount: finalAmount,
 				});
 				break;
 			default:
